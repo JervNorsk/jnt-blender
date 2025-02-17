@@ -11,9 +11,8 @@ ae032183-b07a-451b-8edf-aacaf4c0adbd:JNT:JNT
 cdd4158a-770c-4b3c-af5a-de9cc402a025:JNT/Geometry:JNT-Geometry
 b6bc3c79-2c59-4082-9252-749f2fd3a9c0:JNT/Geometry/Operations:JNT-Geometry-Operations
 3b879307-270b-42d2-a168-6f0bf450e4bc:JNT/Geometry/Read:JNT-Geometry-Read
-4f21b7c2-af7e-4bd4-830b-6ac2e28b340a:JNT/Geometry/Variable:JNT-Geometry-Variable
-8dcff86a-80b1-4e3f-90ce-1539bfb5b129:JNT/Geometry/Variable/Read:JNT-Geometry-Variable-Read
-a644fa11-a15d-4257-a0a9-c54dec427841:JNT/Geometry/Variable/Write:JNT-Geometry-Variable-Write
+c3b54ec1-98ba-49a5-8355-e697be70fe99:JNT/Geometry/Sample:JNT-Geometry-Sample
+b934eeaa-09e6-4575-bf2c-03e6d88f2563:JNT/Geometry/Write:JNT-Geometry-Write
 afa079ac-2b08-426a-8d89-46ee71e0207c:JNT/Input:JNT-Input
 d372a08f-1c06-44f1-86f4-2dd210ced834:JNT/Input/Scene:JNT-Input-Scene
 d1cdaf16-64ab-443c-85c1-1c3b039ed754:JNT/Mesh:JNT-Mesh
