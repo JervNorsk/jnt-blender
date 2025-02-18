@@ -1,9 +1,17 @@
 [project]
-name = "teleforumfor"
+name = "jnt"
 version = "0.1.0"
 description = ""
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "bpy>=4.3.0",
+    "jnt-sandbox",
+    "jnt-comfyui",
 ]
+
+[tool.uv.workspace]
+members = ["modules/*"]
+
+[tool.uv.sources]
+jnt-sandbox = { workspace = true }
+jnt-comfyui = { workspace = true }

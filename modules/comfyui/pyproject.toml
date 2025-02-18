@@ -1,0 +1,9 @@
+[project]
+name = "jnt-comfyui"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "bpy>=4.3.0",
+]

@@ -1,14 +1,14 @@
 schema_version = "1.0.0"
 
-id = "jnt"
+id = "jnt_sandbox"
 version = "0.1.0"
 type = "add-on"
 
-name = "JNT"
+name = "JNT Sandbox"
 tagline = "A collection of experiments and custom nodes"
 maintainer = "Jerv Norsk <jerv.norsk@gmail.com>"
 
-website = "https://extensions.blender.org/add-ons/jnt/"
+website = "https://extensions.blender.org/add-ons/jnt_sandbox/"
 tags = [
     "Geometry Nodes"
 ]
@@ -53,13 +53,9 @@ copyright = [
 # files = "Import/export FBX from/to disk"
 # clipboard = "Copy and paste bone transforms"
 
-# # Optional: advanced build settings.
-# # https://docs.blender.org/manual/en/dev/advanced/extensions/command_line_arguments.html#command-line-args-extension-build
-# [build]
-# # These are the default build excluded patterns.
-# # You only need to edit them if you want different options.
-# paths_exclude_pattern = [
-#   "__pycache__/",
-#   "/.git/",
-#   "/*.zip",
-# ]
+[build]
+paths_exclude_pattern = [
+    "__pycache__/",
+    "/.git/",
+    "/build/",
+]
