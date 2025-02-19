@@ -1,7 +1,15 @@
 [tools]
+gh = "latest"
 python = "3.11"
 uv = "0.5.24"
 
 [env]
 MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
+
+[tasks.build]
+description = "Build the project"
+run = [
+    "blender --command extension build --source-dir=modules/sandbox --output-dir=build",
+    "blender --command extension server-generate --repo-dir=build"
+]

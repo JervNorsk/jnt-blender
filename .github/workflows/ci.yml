@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    tags: ["*"]
+    branches: ["develop"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  MISE_EXPERIMENTAL: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: moguri/setup-blender@v1
+        with:
+          blender-version: '4.3.0'
+
+      - uses: jdx/mise-action@v2
+      - run: mise run build
+
+      - name: Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: build/

@@ -7,13 +7,13 @@ modules = [
 ]
 
 def register():
-    print("Registering JNT extension")
+    print("Registering JNT Sandbox extension")
 
     for mod in modules:
         mod.register()
 
 def unregister():
-    print("Unregistering JNT extension")
+    print("Unregistering JNT Sandbox extension")
 
     for mod in reversed(modules):
         mod.unregister()
