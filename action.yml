@@ -10,6 +10,14 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Cache Blender Installation
+      uses: actions/cache@v4
+      with:
+        path: /opt/hostedtoolcache/blender/${{ inputs.version }}
+        key: ${{ runner.os }}-blender-${{ hashFiles('**/action.yml') }}-${{ inputs.version }}
+        restore-keys: |
+          ${{ runner.os }}-blender-
+
     - name: Install Blender
       uses: moguri/setup-blender@v1
       with:
