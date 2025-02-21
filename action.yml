@@ -1,0 +1,16 @@
+name: "JNT Blender Setup"
+description: "Extensive Blender installation management"
+author: "JervNorsk"
+
+inputs:
+  version:
+    description: "The Blender version to install"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Blender
+      uses: moguri/setup-blender@v1
+      with:
+        blender-version: ${{ inputs.version }}
