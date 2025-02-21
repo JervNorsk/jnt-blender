@@ -1,0 +1,90 @@
+name: 'JNT Blender Extensions'
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    tags: ["*"]
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  MISE_EXPERIMENTAL: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout to workflow branch
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Install Mise
+        uses: jdx/mise-action@v2
+        with:
+          cache: true
+
+      # TODO: install Blender via MISE
+
+      - name: Install Blender
+        uses: JervNorsk/jnt-blender-setup@develop
+        with:
+          version: 4.3.0
+
+      - name: Install zip and unzip
+        run: sudo apt-get update && sudo apt-get install -y zip unzip
+
+      - name: Run build
+        run: mise run extensions-build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: jnt-blender-extensions
+          path: ./build/extensions
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout to workflow branch
+        uses: actions/checkout@v4
+
+      - name: Create empty branch
+        run: |
+          git fetch origin
+          git checkout -b release/next
+          git reset --hard origin/release/next || exit 0
+          git rm -rf --ignore-unmatch . || exit 0
+          git add .
+          git status
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jnt-blender-extensions
+          path: ./
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Update release/next content"
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push -u origin release/next

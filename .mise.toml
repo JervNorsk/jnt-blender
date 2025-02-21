@@ -7,9 +7,24 @@ uv = "0.5.24"
 MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
 
-[tasks.build]
+[tasks.extensions-build]
 description = "Build the project"
 run = [
-    "blender --command extension build --source-dir=modules/sandbox --output-dir=build",
-    "blender --command extension server-generate --repo-dir=build"
+    "mkdir build || exit 0",
+    "cd build && mkdir extensions || exit 0",
+    "blender -c extension build --source-dir modules/extensions/sandbox --output-dir build/extensions",
+    "blender -c extension build --source-dir modules/extensions/comfyui --output-dir build/extensions",
+    "blender -c extension server-generate --repo-dir build/extensions"
+]
+
+[tasks.extensions-ci]
+description = "Run continuous integration"
+run = [
+    "gh workflow run ci.yml --ref develop"
+]
+
+[tasks.extensions]
+description = "Access to Blender Extensions CLI"
+run = [
+    "blender -c extension"
 ]

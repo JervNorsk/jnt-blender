@@ -5,7 +5,8 @@ version = "0.1.0"
 type = "add-on"
 
 name = "JNT ComfyUI"
-tagline = "This extension want provide a custom node graph as interface between Blender and ComfyUI."
+tagline = "Blender extension for ComfyUI"
+description = "This extension want provide a custom node graph as interface between Blender and ComfyUI."
 maintainer = "Jerv Norsk <jerv.norsk@gmail.com>"
 
 website = "https://extensions.blender.org/add-ons/jnt_comfyui/"
