@@ -17,10 +17,22 @@ run = [
     "blender -c extension server-generate --repo-dir build/extensions"
 ]
 
-[tasks.extensions-ci]
-description = "Run continuous integration"
+[tasks.extensions-publish]
+description = "Publish Blender Extesion on release/next with GitHub Actions"
 run = [
-    "gh workflow run ci.yml --ref develop"
+    "gh workflow run jnt-blender-extensions.yml --ref develop"
+]
+
+[tasks.extensions-publish-status]
+description = ""
+run = [
+    "gh run list --workflow=jnt-blender-extensions.yml"
+]
+
+[tasks.extensions-unpublish]
+description = "Drop Blender Extension on release/next"
+run = [
+    "git push -d origin release/next"
 ]
 
 [tasks.extensions]
