@@ -40,3 +40,15 @@ description = "Access to Blender Extensions CLI"
 run = [
     "blender -c extension"
 ]
+
+[tasks.extensions-install]
+description = "Install extension to Blender"
+run = [
+    "blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
+]
+
+[tasks.extensions-uninstall]
+description = "Uninstall extension to Blender"
+run = [
+    "blender -c extension repo-remove jnt"
+]
