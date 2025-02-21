@@ -23,7 +23,7 @@
       ],
       "archive_url": "./jnt_sandbox-0.1.0.zip",
       "archive_size": 14879,
-      "archive_hash": "sha256:72dee4590f0e61b13afd59eed69bb605c05030640c4a44e7cb3f1be0daf1c238"
+      "archive_hash": "sha256:1864c931855728bc3235333ca938d8fe9aef657567625e8713da5b314f06371a"
     },
     {
       "schema_version": "1.0.0",
@@ -46,7 +46,7 @@
       ],
       "archive_url": "./jnt_comfyui-0.1.0.zip",
       "archive_size": 14317,
-      "archive_hash": "sha256:82a2d8bde3527b3ac14d318d0f349ef69a34a68d65b4d27abd5589fbb0fb8bb4"
+      "archive_hash": "sha256:fdf72b3e9602c399a87a34773b147d5cbac7726e20a89432650860c78879ff2c"
     }
   ]
 }
