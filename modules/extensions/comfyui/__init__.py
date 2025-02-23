@@ -3,13 +3,17 @@
 modules = []
 
 def register():
-    print("Registering JNT ComfyUI extension")
+    # print("--------------------------------------------------------------------------------")
+    # print("Registering JNT ComfyUI extension")
+    # print("--------------------------------------------------------------------------------")
 
     for mod in modules:
         mod.register()
 
 def unregister():
-    print("Unregistering JNT ComfyUI extension")
+    # print("--------------------------------------------------------------------------------")
+    # print("Unregistering JNT ComfyUI extension")
+    # print("--------------------------------------------------------------------------------")
 
     for mod in reversed(modules):
         mod.unregister()
