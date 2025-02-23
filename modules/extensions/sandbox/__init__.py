@@ -1,19 +1,31 @@
 from . import (
-    ui
+    ui,
+    asset
 )
 
 modules = [
-    ui
+    ui,
+    asset
 ]
 
 def register():
+    print("--------------------------------------------------------------------------------")
     print("Registering JNT Sandbox extension")
+    print("--------------------------------------------------------------------------------")
 
     for mod in modules:
-        mod.register()
+        if hasattr(mod, 'register'):
+            mod.register()
+
+    print()
 
 def unregister():
+    print("--------------------------------------------------------------------------------")
     print("Unregistering JNT Sandbox extension")
+    print("--------------------------------------------------------------------------------")
 
     for mod in reversed(modules):
-        mod.unregister()
+        if hasattr(mod, 'unregister'):
+            mod.unregister()
+
+    print()

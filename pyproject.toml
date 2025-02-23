@@ -7,10 +7,11 @@ requires-python = ">=3.11"
 dependencies = [
     "jnt-sandbox",
     "jnt-comfyui",
+    "toml"
 ]
 
 [tool.uv.workspace]
-members = ["modules/*"]
+members = ["modules/extensions/*"]
 
 [tool.uv.sources]
 jnt-sandbox = { workspace = true }

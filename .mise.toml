@@ -17,6 +17,12 @@ run = [
     "blender -c extension server-generate --repo-dir build/extensions"
 ]
 
+[tasks.extensions-version]
+description = "Set a new version to Blender extension/s"
+run = [
+    'python ./.mise/scripts/set_extension_version.py {{arg(name="extension_name")}} {{arg(name="version")}}'
+]
+
 [tasks.extensions-publish]
 description = "Publish Blender Extesion on release/next with GitHub Actions"
 run = [
@@ -30,13 +36,13 @@ run = [
 ]
 
 [tasks.extensions-unpublish]
-description = "Drop Blender Extension on release/next"
+description = "Drop Blender extensions on release/next"
 run = [
     "git push -d origin release/next"
 ]
 
 [tasks.extensions]
-description = "Access to Blender Extensions CLI"
+description = "Access to Blender extensions CLI"
 run = [
     "blender -c extension"
 ]
@@ -51,4 +57,10 @@ run = [
 description = "Uninstall extension to Blender"
 run = [
     "blender -c extension repo-remove jnt"
+]
+
+[tasks.check]
+description = ""
+run = [
+    "blender -c extension sync"
 ]
