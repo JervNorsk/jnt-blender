@@ -8,6 +8,9 @@
       <webServer id="f1e5b499-0425-4515-b1d0-73c2ce584d54" name="Roaming">
         <fileTransfer mountedRoot="C:\Users\jervn\AppData\Roaming\Blender Foundation\Blender" accessType="MOUNT" port="0" />
       </webServer>
+      <webServer id="a8da6ed8-aade-41e0-9996-095fcb744c87" name="Mise">
+        <fileTransfer mountedRoot="C:\Users\jervn\scoop\apps\mise" accessType="MOUNT" port="0" />
+      </webServer>
     </option>
   </component>
 </project>

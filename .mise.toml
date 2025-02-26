@@ -3,6 +3,9 @@ gh = "latest"
 python = "3.11"
 uv = "0.5.24"
 
+[plugins]
+blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+
 [env]
 MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
@@ -17,6 +20,18 @@ run = [
 description = "Push changes of GitHub Actions"
 run = [
     "git subtree push --prefix=.github/actions/setup origin actions/setup"
+]
+
+[tasks."mise:tools:pull"]
+description = "Pull changes of Mise tools"
+run = [
+    "git subtree pull --prefix=.mise/tools/blender origin mise/blender --squash"
+]
+
+[tasks."mise:tools:push"]
+description = "Push changes of Mise tools"
+run = [
+    "git subtree push --prefix=.mise/tools/blender origin mise/blender"
 ]
 
 [tasks."blender:extensions:build"]
