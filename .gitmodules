@@ -1,3 +1,0 @@
-[submodule ".github/actions/setup"]
-	path = .github/actions/setup
-	url = https://github.com/JervNorsk/jnt-blender-setup.git
