@@ -2,10 +2,8 @@ name: 'JNT Blender Extensions'
 
 on:
   workflow_dispatch:
-  pull_request:
   push:
-    tags: ["*"]
-    branches: ["main"]
+    branches: ["*"]
 
 permissions:
   contents: write
@@ -35,7 +33,7 @@ jobs:
       # TODO: install Blender via MISE
 
       - name: Install Blender
-        uses: JervNorsk/jnt-blender-setup@develop
+        uses: JervNorsk/jnt-blender@actions/setup
         with:
           version: 4.3.0
 
@@ -45,13 +43,15 @@ jobs:
       - name: Run build
         run: mise run extensions-build
 
-      - name: Upload artifacts
+      - if: github.ref == 'refs/heads/release'
+        name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: jnt-blender-extensions
           path: ./build/extensions
 
   deploy:
+    if: github.ref == 'refs/heads/release'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
