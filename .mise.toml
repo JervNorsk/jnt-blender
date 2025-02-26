@@ -7,6 +7,12 @@ uv = "0.5.24"
 MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
 
+[tasks.gh-actions-pull]
+description = "Keep update GitHub Actions"
+run = [
+    "git subtree pull --prefix=.github/actions/setup origin actions/setup --squash"
+]
+
 [tasks.extensions-build]
 description = "Build the project"
 run = [
@@ -24,7 +30,7 @@ run = [
 ]
 
 [tasks.extensions-publish]
-description = "Publish Blender Extesion on release/next with GitHub Actions"
+description = "Publish Blender Extesion on release branch with GitHub Actions"
 run = [
     "gh workflow run jnt-blender-extensions.yml --ref develop"
 ]
