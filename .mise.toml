@@ -7,19 +7,19 @@ uv = "0.5.24"
 MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
 
-[tasks.gh-actions-pull]
+[tasks."github:actions:pull"]
 description = "Pull changes of GitHub Actions"
 run = [
     "git subtree pull --prefix=.github/actions/setup origin actions/setup --squash"
 ]
 
-[tasks.gh-actions-push]
+[tasks."github:actions:push"]
 description = "Push changes of GitHub Actions"
 run = [
     "git subtree push --prefix=.github/actions/setup origin actions/setup"
 ]
 
-[tasks.extensions-build]
+[tasks."blender:extensions:build"]
 description = "Build the project"
 run = [
     "mkdir build || exit 0",
@@ -29,50 +29,50 @@ run = [
     "blender -c extension server-generate --repo-dir build/extensions"
 ]
 
-[tasks.extensions-version]
+[tasks."blender:extensions:set-version"]
 description = "Set a new version to Blender extension/s"
 run = [
     'python ./.mise/scripts/set_extension_version.py {{arg(name="extension_name")}} {{arg(name="version")}}'
 ]
 
-[tasks.extensions-publish]
-description = "Publish Blender Extesion on release branch with GitHub Actions"
-run = [
-    "gh workflow run jnt-blender-extensions.yml --ref develop"
-]
+#[tasks."blender:extensions:publish"]
+#description = "Publish Blender Extesion on release branch with GitHub Actions"
+#run = [
+#    "gh workflow run jnt-blender-extensions.yml --ref develop"
+#]
+#
+#[tasks."blender:extensions:publish:status"]
+#description = ""
+#run = [
+#    "gh run list --workflow=jnt-blender-extensions.yml"
+#]
+#
+#[tasks."blender:extensions:unpublish"]
+#description = "Drop Blender extensions on release/next"
+#run = [
+#    "git push -d origin release/next"
+#]
 
-[tasks.extensions-publish-status]
-description = ""
-run = [
-    "gh run list --workflow=jnt-blender-extensions.yml"
-]
-
-[tasks.extensions-unpublish]
-description = "Drop Blender extensions on release/next"
-run = [
-    "git push -d origin release/next"
-]
-
-[tasks.extensions]
+[tasks."blender:extensions:cli"]
 description = "Access to Blender extensions CLI"
 run = [
     "blender -c extension"
 ]
 
-[tasks.extensions-install]
-description = "Install extension to Blender"
+[tasks."blender:extensions:setup"]
+description = "Setup extension on Blender"
 run = [
     "blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
 ]
 
-[tasks.extensions-uninstall]
-description = "Uninstall extension to Blender"
+[tasks."blender:extensions:clean"]
+description = "Clean up extension on Blender"
 run = [
     "blender -c extension repo-remove jnt"
 ]
 
-[tasks.check]
-description = ""
+[tasks."blender:extensions:check"]
+description = "Check up extension on Blender"
 run = [
     "blender -c extension sync"
 ]
