@@ -8,9 +8,15 @@ MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
 
 [tasks.gh-actions-pull]
-description = "Keep update GitHub Actions"
+description = "Pull changes of GitHub Actions"
 run = [
     "git subtree pull --prefix=.github/actions/setup origin actions/setup --squash"
+]
+
+[tasks.gh-actions-push]
+description = "Push changes of GitHub Actions"
+run = [
+    "git subtree push --prefix=.github/actions/setup origin actions/setup"
 ]
 
 [tasks.extensions-build]
