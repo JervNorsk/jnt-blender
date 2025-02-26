@@ -1,5 +1,5 @@
 name: "JNT Blender Setup"
-description: "Extensive Blender installation management"
+description: "Allow to install Blender along GitHub Actions pipeline"
 author: "JervNorsk"
 
 inputs:
