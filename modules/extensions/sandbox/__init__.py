@@ -1,11 +1,11 @@
 from . import (
     ui,
-    asset
+    assets
 )
 
 modules = [
     ui,
-    asset
+    assets
 ]
 
 def register():

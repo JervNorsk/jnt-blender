@@ -1,7 +1,6 @@
 import sys
 import os
 import importlib
-import toml
 
 import bpy
 
