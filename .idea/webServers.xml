@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="57575d97-31ee-46d5-b7f2-698872e66c9d" name="Blender">
+        <fileTransfer mountedRoot="F:\Games\Steam\steamapps\common\Blender" accessType="MOUNT" port="0" />
+      </webServer>
+      <webServer id="f1e5b499-0425-4515-b1d0-73c2ce584d54" name="Roaming">
+        <fileTransfer mountedRoot="C:\Users\jervn\AppData\Roaming\Blender Foundation\Blender" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
