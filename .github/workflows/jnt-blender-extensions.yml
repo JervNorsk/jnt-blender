@@ -3,7 +3,9 @@ name: 'JNT Blender Extensions'
 on:
   workflow_dispatch:
   push:
-    branches: ["*"]
+    branches:
+      - main
+      - release
 
 permissions:
   contents: write
