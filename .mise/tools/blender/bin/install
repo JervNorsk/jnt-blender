@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-version="$1"
-install_path="$2"
-
-echo "# [blender] > INSTALLATION PLUGIN MISE"
-echo "# [blender] > Version: $version"
-echo "# [blender] > Path: $install_path"

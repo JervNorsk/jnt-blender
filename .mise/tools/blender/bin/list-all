@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-echo "0.0.1"
-echo "0.0.2"
-echo "0.0.3"
-echo "0.1.0-edge"
-echo "0.1.0"

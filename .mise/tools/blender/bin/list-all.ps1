@@ -1,5 +1,0 @@
-Write-Output "0.0.1"
-Write-Output "0.0.2"
-Write-Output "0.0.3"
-Write-Output "0.1.0-edge"
-Write-Output "0.1.0"
