@@ -11,6 +11,9 @@
       <webServer id="a8da6ed8-aade-41e0-9996-095fcb744c87" name="Mise">
         <fileTransfer mountedRoot="C:\Users\jervn\scoop\apps\mise" accessType="MOUNT" port="0" />
       </webServer>
+      <webServer id="6d27ddf4-f84c-4d94-a43d-0c05ac3b9e4a" name="Aqua">
+        <fileTransfer mountedRoot="C:\Users\jervn\AppData\Local\aquaproj-aqua" accessType="MOUNT" port="0" />
+      </webServer>
     </option>
   </component>
 </project>
