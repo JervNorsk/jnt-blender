@@ -1,12 +1,41 @@
 [tools]
+act = "latest"
 gh = "latest"
 python = "3.11"
-uv = "0.5.24"
+uv = "latest"
+aqua = "latest"
+#blender = { version='latest', source = "aqua:jervnorsk/jnt-blender#mise/blender"}
+#blender = { version = '3.10', foo = 'bar' }
+#blender = "4.3.0"
+#yazi = "latest"
+#"https://download.blender.org/release/Blender4.3/blender-4.3.2-windows-x64.zip"|
+#"pipx:ansible-core" = { version = "latest", uvx_args = "--with ansible" }
 
-[plugins]
-blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+#[alias.aqua.versions]
+#registry_url = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+#git = "https://github.com/tuo-repository/aqua-backend.git"
+#version = "latest"
+
+#[alias]
+#blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+#blender = { versions = { registry_url = "aqua:https://github.com/JervNorsk/jnt-blender" } }
+
+#[alias.blender.versions]
+#registry_url = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+
+#blender = "aqua:JervNorsk/jnt-blender#mise/blender"
+##nodez = 'asdf:company/our-custom-node' # shorthand for https://github.com/company/our-custom-node
+##erlang = 'asdf:https://github.com/company/our-custom-erlang'
+
+#[plugins]
+#blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
 
 [env]
+AQUA_LOG_LEVEL="debug"
+AQUA_DISABLE_POLICY="true"
+#MISE_AQUA_LOG_LEVEL="debug"
+#MISE_AQUA_REGISTRY_URL="https://nuovo-registro.com/registry.yaml"
+#MISE_AQUA_REGISTRY_URL="https://github.com/JervNorsk/jnt-blender#mise/blender"
 MISE_PYTHON_UV_VENV_AUTO = true
 _.python.venv = { path = ".venv", create = true }
 
@@ -31,7 +60,20 @@ run = [
 [tasks."mise:tools:push"]
 description = "Push changes of Mise tools"
 run = [
-    "git subtree push --prefix=.mise/tools/blender origin mise/blender"
+    "git subtree push --prefix=.mise/tools/blender origin mise/blender",
+]
+
+[tasks."mise:tools:install"]
+description = "Install Mise tools"
+run = [
+    "mise plugins update blender",
+    "mise -v install blender"
+]
+
+[tasks."blender"]
+description = "Run local Blender"
+run = [
+    "aqua exec -- blender",
 ]
 
 [tasks."blender:extensions:build"]
@@ -39,9 +81,9 @@ description = "Build the project"
 run = [
     "mkdir build || exit 0",
     "cd build && mkdir extensions || exit 0",
-    "blender -c extension build --source-dir modules/extensions/sandbox --output-dir build/extensions",
-    "blender -c extension build --source-dir modules/extensions/comfyui --output-dir build/extensions",
-    "blender -c extension server-generate --repo-dir build/extensions"
+    "aqua exec -- blender -c extension build --source-dir modules/extensions/sandbox --output-dir build/extensions",
+    "aqua exec -- blender -c extension build --source-dir modules/extensions/comfyui --output-dir build/extensions",
+    "aqua exec -- blender -c extension server-generate --repo-dir build/extensions"
 ]
 
 [tasks."blender:extensions:set-version"]
@@ -71,23 +113,23 @@ run = [
 [tasks."blender:extensions:cli"]
 description = "Access to Blender extensions CLI"
 run = [
-    "blender -c extension"
+    "aqua exec -- blender -c extension"
 ]
 
 [tasks."blender:extensions:setup"]
 description = "Setup extension on Blender"
 run = [
-    "blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
+    "aqua exec -- blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
 ]
 
 [tasks."blender:extensions:clean"]
 description = "Clean up extension on Blender"
 run = [
-    "blender -c extension repo-remove jnt"
+    "aqua exec -- blender -c extension repo-remove jnt"
 ]
 
 [tasks."blender:extensions:check"]
 description = "Check up extension on Blender"
 run = [
-    "blender -c extension sync"
+    "aqua exec -- blender -c extension sync"
 ]

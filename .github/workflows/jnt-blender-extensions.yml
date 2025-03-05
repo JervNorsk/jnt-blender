@@ -43,7 +43,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y zip unzip
 
       - name: Run build
-        run: mise run extensions-build
+        run: mise run blender:extensions:build
 
       - if: github.ref == 'refs/heads/release'
         name: Upload artifacts
