@@ -4,14 +4,14 @@ registries:
 
 - name: local
   type: local
-  path: .mise/tools/blender/registry.yaml
+  path: .mise/tools/blender/aqua/registry.yaml
 
-- name: github
-  type: github_content
-  repo_owner: jervnorsk
-  repo_name: jnt-blender
-  ref: mise/blender
-  path: registry.yaml
+#- name: github
+#  type: github_content
+#  repo_owner: jervnorsk
+#  repo_name: jnt-blender
+#  ref: mise/blender/aqua
+#  path: registry.yaml
 
 packages:
   - name: blender/blender@4.3.2

@@ -17,6 +17,7 @@ aqua = "latest"
 #version = "latest"
 
 #[alias]
+#blender = ""
 #blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
 #blender = { versions = { registry_url = "aqua:https://github.com/JervNorsk/jnt-blender" } }
 
@@ -60,7 +61,8 @@ run = [
 [tasks."mise:tools:push"]
 description = "Push changes of Mise tools"
 run = [
-    "git subtree push --prefix=.mise/tools/blender origin mise/blender",
+    "git subtree push --prefix=.mise/tools/blender/aqua origin mise/blender/aqua",
+    "git subtree push --prefix=.mise/tools/blender/plugin origin mise/blender/plugin",
 ]
 
 [tasks."mise:tools:install"]
@@ -73,7 +75,14 @@ run = [
 [tasks."blender"]
 description = "Run local Blender"
 run = [
+#    "blender",
     "aqua exec -- blender",
+]
+
+[tasks."blender:version"]
+description = "Show Blender version"
+run = [
+    "blender -v"
 ]
 
 [tasks."blender:extensions:build"]
@@ -81,9 +90,9 @@ description = "Build the project"
 run = [
     "mkdir build || exit 0",
     "cd build && mkdir extensions || exit 0",
-    "aqua exec -- blender -c extension build --source-dir modules/extensions/sandbox --output-dir build/extensions",
-    "aqua exec -- blender -c extension build --source-dir modules/extensions/comfyui --output-dir build/extensions",
-    "aqua exec -- blender -c extension server-generate --repo-dir build/extensions"
+    "blender -c extension build --source-dir modules/extensions/sandbox --output-dir build/extensions",
+    "blender -c extension build --source-dir modules/extensions/comfyui --output-dir build/extensions",
+    "blender -c extension server-generate --repo-dir build/extensions"
 ]
 
 [tasks."blender:extensions:set-version"]
@@ -113,23 +122,23 @@ run = [
 [tasks."blender:extensions:cli"]
 description = "Access to Blender extensions CLI"
 run = [
-    "aqua exec -- blender -c extension"
+    "blender -c extension"
 ]
 
 [tasks."blender:extensions:setup"]
 description = "Setup extension on Blender"
 run = [
-    "aqua exec -- blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
+    "blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
 ]
 
 [tasks."blender:extensions:clean"]
 description = "Clean up extension on Blender"
 run = [
-    "aqua exec -- blender -c extension repo-remove jnt"
+    "blender -c extension repo-remove jnt"
 ]
 
 [tasks."blender:extensions:check"]
 description = "Check up extension on Blender"
 run = [
-    "aqua exec -- blender -c extension sync"
+    "blender -c extension sync"
 ]
