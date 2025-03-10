@@ -1,0 +1,6 @@
+#:schema https://mise.jdx.dev/schema/mise.plugin.json
+
+#[plugin]
+#name = "blender"
+#description = ""
+#source = "https://github.com/JervNorsk/jnt-blender"
