@@ -4,6 +4,8 @@ import importlib
 
 import bpy
 
+# -----------------------------------------------------------------------------
+
 def get_extension_id():
     current_module = __name__
     return current_module.rsplit('.', 1)[0] if '.' in current_module else None
@@ -20,10 +22,10 @@ def get_extension_path():
 
 def validate_extension_asset_library_is_present():
     asset_library = find_extension_asset_library();
-    if asset_library is None:
-        print("# Extension AssetLibrary not present!")
-    else:
-        print("# Extension AssetLibrary present!")
+    # if asset_library is None:
+    #     print("# Extension AssetLibrary not present!")
+    # else:
+    #     print("# Extension AssetLibrary present!")
 
 def find_extension_asset_library():
     for it in bpy_asset_libraries:
@@ -56,7 +58,7 @@ def unregister():
     jnt_asset_library = find_extension_asset_library()
     if jnt_asset_library is not None:
         bpy_asset_libraries.remove(jnt_asset_library)
-        bpy.ops.wm.save_userpref()
+        # bpy.ops.wm.save_userpref()
 
     validate_extension_asset_library_is_present()
 

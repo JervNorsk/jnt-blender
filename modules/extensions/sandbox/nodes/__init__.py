@@ -1,12 +1,11 @@
-import bpy
 from . import (
-    topbar
+    tags
 )
 
 # -----------------------------------------------------------------------------
 
 modules = (
-    topbar,
+    tags,
 )
 
 def register():

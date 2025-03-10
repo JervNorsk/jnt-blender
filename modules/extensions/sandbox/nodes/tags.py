@@ -1,40 +1,45 @@
 import bpy
-from bpy.types import (
-    Operator
-)
-from bl_ui.space_topbar import (
-    TOPBAR_MT_editor_menus
-)
-
-from ..utils import extension
 
 # -----------------------------------------------------------------------------
 
-class TOPBAR_MT_editor_menus(TOPBAR_MT_editor_menus):
+from bl_ui import (
+    node_add_menu
+)
+from bl_ui.node_add_menu_geometry import (
+    NODE_MT_geometry_node_GEO_ATTRIBUTE
+)
+
+class NODE_MT_geometry_node_GEO_ATTRIBUTE(NODE_MT_geometry_node_GEO_ATTRIBUTE):
 
     def draw(self, context):
-        layout = self.layout
         super().draw(context)
-        layout.menu("TOPBAR_MT_extension_JNT")
 
-
-class TOPBAR_MT_extension_JNT(bpy.types.Menu):
-    bl_idname = "TOPBAR_MT_extension_JNT"
-    bl_label = "JNT"
-
-    def draw(self, context):
         layout = self.layout
+        layout.separator()
+        node_add_menu.add_node_type(layout, "GeometryNodeSetTags")
 
-        op = layout.operator("extensions.repo_reload", text="Reload", icon='FILE_REFRESH')
-        print(op)
-        print(hasattr(op, "name"))
-        # op.name = __name__.split('.')[1]
+# -----------------------------------------------------------------------------
+
+from bpy.types import (
+    GeometryNode
+)
+from mathutils import (
+    Color
+)
+
+class GeometryNodeSetTags(GeometryNode):
+    bl_idname = "GeometryNodeSetTags"
+    bl_label = "Set Tags"
+
+    color = Color((0.0, 0.0, 1.0))
+
+
 
 # -----------------------------------------------------------------------------
 
 classes = (
-    TOPBAR_MT_editor_menus,
-    TOPBAR_MT_extension_JNT,
+    NODE_MT_geometry_node_GEO_ATTRIBUTE,
+    GeometryNodeSetTags,
 )
 
 def register():
@@ -54,3 +59,4 @@ def unregister():
         except Exception as e:
             print(f"# Unregistering {__name__}.{it.__name__} [FAILED]")
             print(e)
+
