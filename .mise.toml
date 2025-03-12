@@ -1,144 +1,67 @@
+[settings]
+#trace = true
+
 [tools]
-act = "latest"
-gh = "latest"
-python = "3.11"
-uv = "latest"
-aqua = "latest"
-#blender = { version='latest', source = "aqua:jervnorsk/jnt-blender#mise/blender"}
-#blender = { version = '3.10', foo = 'bar' }
-#blender = "4.3.0"
-#yazi = "latest"
-#"https://download.blender.org/release/Blender4.3/blender-4.3.2-windows-x64.zip"|
-#"pipx:ansible-core" = { version = "latest", uvx_args = "--with ansible" }
+#act = "latest"
+#gh = "latest"
 
-#[alias.aqua.versions]
-#registry_url = "https://github.com/JervNorsk/jnt-blender#mise/blender"
-#git = "https://github.com/tuo-repository/aqua-backend.git"
-#version = "latest"
+#[task_config]
+#includes = [
+#    "tasks.toml",
+#    "modules/core/tasks.toml",
+#    "modules/extensions/tasks.toml",
+#]
 
-#[alias]
-#blender = ""
-#blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
-#blender = { versions = { registry_url = "aqua:https://github.com/JervNorsk/jnt-blender" } }
+[tasks."mise:tools"]
+dir = '{{cwd}}/.mise/tools'
+run = 'mise r mise:tools:{{arg(var=true, default="tasks")}}'
 
-#[alias.blender.versions]
-#registry_url = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+[tasks."mise:registry"]
+dir = "{{cwd}}/.mise/registry"
+run = "mise r mise:registry:{{arg(var=true, default='tasks')}}"
 
-#blender = "aqua:JervNorsk/jnt-blender#mise/blender"
-##nodez = 'asdf:company/our-custom-node' # shorthand for https://github.com/company/our-custom-node
-##erlang = 'asdf:https://github.com/company/our-custom-erlang'
+[tasks."blender:core"]
+dir = "{{cwd}}/modules/core"
+run = "mise r blender:core:{{arg(var=true, default='tasks')}}"
 
-#[plugins]
-#blender = "https://github.com/JervNorsk/jnt-blender#mise/blender"
+[tasks."blender:extensions"]
+dir = "{{cwd}}/modules/extensions"
+run = "mise r blender:extensions:{{arg(var=true, default='tasks')}}"
 
-[env]
-AQUA_LOG_LEVEL="debug"
-AQUA_DISABLE_POLICY="true"
-#MISE_AQUA_LOG_LEVEL="debug"
-#MISE_AQUA_REGISTRY_URL="https://nuovo-registro.com/registry.yaml"
-#MISE_AQUA_REGISTRY_URL="https://github.com/JervNorsk/jnt-blender#mise/blender"
-MISE_PYTHON_UV_VENV_AUTO = true
-_.python.venv = { path = ".venv", create = true }
-
-[tasks."github:actions:pull"]
-description = "Pull changes of GitHub Actions"
-run = [
-    "git subtree pull --prefix=.github/actions/setup origin actions/setup --squash"
-]
-
-[tasks."github:actions:push"]
-description = "Push changes of GitHub Actions"
-run = [
-    "git subtree push --prefix=.github/actions/setup origin actions/setup"
-]
-
-[tasks."mise:tools:pull"]
-description = "Pull changes of Mise tools"
-run = [
-    "git subtree pull --prefix=.mise/tools/blender origin mise/blender --squash"
-]
-
-[tasks."mise:tools:push"]
-description = "Push changes of Mise tools"
-run = [
-    "git subtree push --prefix=.mise/tools/blender/aqua origin mise/blender/aqua",
-    "git subtree push --prefix=.mise/tools/blender/plugin origin mise/blender/plugin",
-]
-
-[tasks."mise:tools:install"]
-description = "Install Mise tools"
-run = [
-    "mise plugins update blender",
-    "mise -v install blender"
-]
-
-[tasks."blender"]
-description = "Run local Blender"
-run = [
-#    "blender",
-    "aqua exec -- blender",
-]
-
-[tasks."blender:version"]
-description = "Show Blender version"
-run = [
-    "blender -v"
-]
-
-[tasks."blender:extensions:build"]
-description = "Build the project"
-run = [
-    "mkdir build || exit 0",
-    "cd build && mkdir extensions || exit 0",
-    "blender -c extension build --source-dir modules/extensions/sandbox --output-dir build/extensions",
-    "blender -c extension build --source-dir modules/extensions/comfyui --output-dir build/extensions",
-    "blender -c extension server-generate --repo-dir build/extensions"
-]
-
-[tasks."blender:extensions:set-version"]
-description = "Set a new version to Blender extension/s"
-run = [
-    'python ./.mise/scripts/set_extension_version.py {{arg(name="extension_name")}} {{arg(name="version")}}'
-]
-
-#[tasks."blender:extensions:publish"]
-#description = "Publish Blender Extesion on release branch with GitHub Actions"
+#[tasks."github:actions:pull"]
+#description = "Pull changes of GitHub Actions"
 #run = [
-#    "gh workflow run jnt-blender-extensions.yml --ref develop"
+#    "git subtree pull --prefix=.github/actions/setup origin actions/setup --squash"
 #]
 #
-#[tasks."blender:extensions:publish:status"]
-#description = ""
+#[tasks."github:actions:push"]
+#description = "Push changes of GitHub Actions"
 #run = [
-#    "gh run list --workflow=jnt-blender-extensions.yml"
+#    "git subtree push --prefix=.github/actions/setup origin actions/setup"
 #]
 #
-#[tasks."blender:extensions:unpublish"]
-#description = "Drop Blender extensions on release/next"
+#[tasks."mise:tools:pull"]
+#description = "Pull changes of Mise tools"
 #run = [
-#    "git push -d origin release/next"
+#    "git subtree pull --prefix=.mise/tools/blender/aqua origin mise/blender/aqua --squash",
+#    "git subtree pull --prefix=.mise/tools/blender/plugin origin mise/blender/plugin --squash",
 #]
-
-[tasks."blender:extensions:cli"]
-description = "Access to Blender extensions CLI"
-run = [
-    "blender -c extension"
-]
-
-[tasks."blender:extensions:setup"]
-description = "Setup extension on Blender"
-run = [
-    "blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
-]
-
-[tasks."blender:extensions:clean"]
-description = "Clean up extension on Blender"
-run = [
-    "blender -c extension repo-remove jnt"
-]
-
-[tasks."blender:extensions:check"]
-description = "Check up extension on Blender"
-run = [
-    "blender -c extension sync"
-]
+#
+#[tasks."mise:tools:push"]
+#description = "Push changes of Mise tools"
+#run = [
+#    "git subtree push --prefix=.mise/tools/blender/aqua origin mise/blender/aqua",
+#    "git subtree push --prefix=.mise/tools/blender/plugin origin mise/blender/plugin",
+#]
+#
+##[tasks."mise:tools:install"]
+##description = "Install Mise tools"
+##run = [
+##    "mise plugins update blender",
+##    "mise -v install blender"
+##]
+#
+##[tasks."blender:core"]
+##run = [
+##    "mise -C modules/core r blender:core:"
+##]

@@ -1,0 +1,11 @@
+# This is an Asset Catalog Definition file for Blender.
+#
+# Empty lines and lines starting with `#` will be ignored.
+# The first non-ignored line should be the version indicator.
+# Other lines are of the format "UUID:catalog/path/for/assets:simple catalog name"
+
+VERSION 1
+
+d0420eea-ef67-4b03-9daa-86df055e1498:JNT:JNT
+ea91e9b6-31b7-4a9c-9873-2b46554be246:JNT/Shaders:JNT-Shaders
+a5aa4622-0eb4-456a-926c-02cc12469c80:JNT/Shaders/NPBR:JNT-Shaders-NPBR

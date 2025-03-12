@@ -1,0 +1,40 @@
+[settings]
+
+[tools]
+make = "latest"
+cmake = "latest"
+
+[vars]
+branch_name="{{exec(command='cd blender; git branch --show-current')}}"
+src_dir="{{cwd}}/blender"
+build_dir="{{cwd}}/../../build/core/{{os()}}_{{arch()}}_{{vars.branch_name}}"
+
+[tasks."blender:core:tasks"]
+depends = [
+    "mise:tasks blender:core {{cwd}}"
+]
+
+[tasks."blender:core:make:install"]
+run_windows = "scoop install make"
+quiet = true
+hide = true
+
+[tasks."blender:core:update"]
+depends = [
+    "blender:core:make:install"
+]
+dir = "{{vars.src_dir}}"
+run = "make update"
+
+[tasks."blender:core:build"]
+depends = [
+    "blender:core:make:install"
+]
+dir = "{{vars.src_dir}}"
+#run = "make builddir {{vars.build_dir}} {{arg(var=true, default='')}}"
+run = "echo {{vars.build_dir}}"
+
+[tasks."blender:core:run"]
+env.GIT_BRANCH_NAME=""
+dir = "{{vars.build_dir}}/bin/Release"
+run = "blender.exe"

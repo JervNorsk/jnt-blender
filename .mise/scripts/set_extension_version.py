@@ -1,7 +1,7 @@
 import toml
 import sys
 
-def update_version_in_manifest(manifest_file, new_version):
+def update_version(manifest_file, new_version):
     # Load file content as TOML
     with open(manifest_file, 'r') as file:
         manifest_data = toml.load(file)
@@ -18,4 +18,5 @@ def update_version_in_manifest(manifest_file, new_version):
         toml.dump(manifest_data, file)
     print(f"[{manifest_data['id']}] Version updated to {new_version}")
 
-update_version_in_manifest(f'./modules/extensions/{sys.argv[1]}/blender_manifest.toml', sys.argv[2])
+update_version(f'./modules/extensions/{sys.argv[1]}/pyproject.toml', sys.argv[2])
+update_version(f'./modules/extensions/{sys.argv[1]}/blender_manifest.toml', sys.argv[2])

@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/core/blender" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/core/blender/lib/windows_x64" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/modules/core/blender/release/datafiles/assets" vcs="Git" />
   </component>
 </project>

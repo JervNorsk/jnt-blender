@@ -14,6 +14,9 @@
       <webServer id="6d27ddf4-f84c-4d94-a43d-0c05ac3b9e4a" name="Aqua">
         <fileTransfer mountedRoot="C:\Users\jervn\AppData\Local\aquaproj-aqua" accessType="MOUNT" port="0" />
       </webServer>
+      <webServer id="02dcb5a3-0c2f-4b95-8ca3-c6f669c82a66" name="Temp">
+        <fileTransfer mountedRoot="C:\Users\jervn\AppData\Local\Temp" accessType="MOUNT" port="0" />
+      </webServer>
     </option>
   </component>
 </project>

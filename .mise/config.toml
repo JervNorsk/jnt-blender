@@ -1,0 +1,15 @@
+[settings]
+auto_install = true
+
+[tasks."mise:tasks"]
+run = [
+    'echo ----------------------------------------',
+    'echo $ mise r {{arg(i=0)}} tasks',
+    'echo ----------------------------------------',
+    'mise -C {{arg(i=1)}} t --no-header'
+]
+hide = true
+quiet = true
+# TODO: apply mise to strict this configuration file for exclude other tasks
+# TODO: replace blender:core to the output lines
+

@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [tool.uv.workspace]
-members = ["modules/extensions/*"]
+members = ["*"]
 
 [tool.uv.sources]
 jnt-sandbox = { workspace = true }

@@ -1,0 +1,38 @@
+[settings]
+
+[tools]
+#python = "latest"
+
+[tasks."mise:registry:aqua:tasks"]
+depends = [
+    "mise:tasks mise:registry:aqua {{cwd}}"
+]
+
+[tasks."mise:registry:aqua:sync"]
+run = 'python {{cwd}}/registry.py'
+#run = 'python'
+
+#[tasks."mise:tools:"]
+
+#[tasks."blender:core:make:install"]
+#run_windows = "scoop install make"
+#quiet = true
+#hide = true
+#
+#[tasks."blender:core:update"]
+#depends = [
+#    "blender:core:make:install"
+#]
+#dir = "{{vars.src_dir}}"
+#run = "make update"
+#
+#[tasks."blender:core:build"]
+#depends = [
+#    "blender:core:make:install"
+#]
+#dir = "{{vars.src_dir}}"
+#run = "make builddir {{vars.build_dir}}  {{arg(var=true, default='')}}"
+#
+#[tasks."blender:core:run"]
+#dir = "{{vars.build_dir}}/bin/Release"
+#run = "blender.exe"

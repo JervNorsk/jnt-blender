@@ -1,0 +1,34 @@
+[settings]
+
+[tools]
+
+[tasks."mise:tools:tasks"]
+depends = [
+    "mise:tasks mise:tools {{cwd}}"
+]
+
+
+#[tasks."mise:tools:"]
+
+#[tasks."blender:core:make:install"]
+#run_windows = "scoop install make"
+#quiet = true
+#hide = true
+#
+#[tasks."blender:core:update"]
+#depends = [
+#    "blender:core:make:install"
+#]
+#dir = "{{vars.src_dir}}"
+#run = "make update"
+#
+#[tasks."blender:core:build"]
+#depends = [
+#    "blender:core:make:install"
+#]
+#dir = "{{vars.src_dir}}"
+#run = "make builddir {{vars.build_dir}}  {{arg(var=true, default='')}}"
+#
+#[tasks."blender:core:run"]
+#dir = "{{vars.build_dir}}/bin/Release"
+#run = "blender.exe"
