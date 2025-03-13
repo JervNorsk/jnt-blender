@@ -47,7 +47,7 @@ jobs:
           mise -v run blender:extensions build
 
       - name: Upload artifacts
-        if: github.ref == 'refs/heads/release'
+        if: startsWith(github.ref, 'refs/tags/')
         uses: actions/upload-artifact@v4
         with:
           name: jnt-blender-extensions
@@ -55,7 +55,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/release'
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -73,7 +73,7 @@ jobs:
       - name: Check if branch exists
         id: check_branch
         run: |
-          if git show-ref --verify --quiet refs/remotes/origin/release; then
+          if git show-ref --verify --quiet refs/remotes/origin/extensions/release; then
             echo "branch_exists=true" >> $GITHUB_ENV
           else
             echo "branch_exists=false" >> $GITHUB_ENV
@@ -82,7 +82,7 @@ jobs:
       - name: Create new branch if not exists
         if: ${{ env.branch_exists == 'false' }}
         run: |
-          git checkout --orphan release
+          git checkout --orphan extensions/release
           if [ -f .gitmodules ]; then
             git rm --cached .gitmodules
             rm .gitmodules
@@ -91,13 +91,13 @@ jobs:
           echo "# New Branch" > README.md
           git add README.md
           git commit -m "Initial commit on new empty branch"
-          git push origin release
+          git push origin extensions/release
 
       - name: Pull latest changes if branch exists
         if: ${{ env.branch_exists == 'true' }}
         run: |
-          git checkout release
-          git pull origin release
+          git checkout extensions/release
+          git pull origin extensions/release
 
       - name: Download build artifact
         uses: actions/download-artifact@v4
@@ -108,9 +108,9 @@ jobs:
       - name: Commit changes
         run: |
           git add .
-          git commit -m "Update release content"
+          git commit -m "Update extensions/release content"
 
       - name: Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push -u origin release
+        run: git push -u origin extensions/release
