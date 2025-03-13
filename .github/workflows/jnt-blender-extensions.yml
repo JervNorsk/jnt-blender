@@ -7,6 +7,8 @@ on:
       - develop
       - main
       - release
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
