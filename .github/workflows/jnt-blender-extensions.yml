@@ -24,8 +24,6 @@ jobs:
     steps:
       - name: Checkout to workflow branch
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Install Mise
         uses: jdx/mise-action@v2
