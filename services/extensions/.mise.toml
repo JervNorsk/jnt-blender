@@ -12,7 +12,7 @@ aqua = 'latest'
 
 [env]
 UV_LINK_MODE='copy'
-#AQUA_LOG_LEVEL='debug'
+AQUA_LOG_LEVEL='debug'
 AQUA_DISABLE_POLICY='true'
 _.python.venv = { path = '{{cwd}}/.venv' }
 

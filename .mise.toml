@@ -2,8 +2,8 @@
 #trace = true
 
 [tools]
-#act = "latest"
-#gh = "latest"
+act = "latest"
+gh = "latest"
 
 #[task_config]
 #includes = [

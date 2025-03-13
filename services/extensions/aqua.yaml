@@ -14,6 +14,6 @@ registries:
 #  path: registry.yaml
 
 packages:
-  - name: blender/blender@4.3.0
+  - name: blender/blender@4.3.2
     registry: local
 #    registry: github
