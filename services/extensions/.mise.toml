@@ -62,6 +62,7 @@ depends = [
     'blender:extensions:build:create'
 ]
 run = [
+    'uv run {{cwd}}/utils/show_version.py',
 #    'echo {{cwd}}',
 #    'uv sync',
 #    'uv run {{cwd}}/utils/update_version.py {{cwd}}/pyproject.toml',
