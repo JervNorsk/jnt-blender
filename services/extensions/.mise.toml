@@ -1,37 +1,44 @@
 [settings]
 python.uv_venv_auto = true
-#aqua.registry_url = "https://github.com/aquaproj/aqua-registry"
-#aqua.registry_url = "file://{{cwd}}../../.mise/registry/aqua"
-#aqua.registry_url = "file://{{config_root_dir}}"
+#aqua.registry_url = 'https://github.com/aquaproj/aqua-registry'
+#aqua.registry_url = 'file://{{cwd}}../../.mise/registry/aqua'
+#aqua.registry_url = 'file://{{config_root_dir}}'
 
 [tools]
-#python = "3.11"
-uv = "latest"
-aqua = "latest"
-#blender = "latest"
+#python = '3.11'
+uv = 'latest'
+aqua = 'latest'
+#blender = 'latest'
 
 [env]
-#UV_LINK_MODE="copy"
-#AQUA_LOG_LEVEL="debug"
-AQUA_DISABLE_POLICY="true"
-_.python.venv = { path = "{{cwd}}/.venv" }
+UV_LINK_MODE='copy'
+#AQUA_LOG_LEVEL='debug'
+AQUA_DISABLE_POLICY='true'
+_.python.venv = { path = '{{cwd}}/.venv' }
 
 [vars]
+#branch_name='{{ exec(command="git tag --sort=refname | head -n 1") }}'
 build_dir = 'build'
-blender_exec = 'aqua exec -- blender'
+blender_exec = '''
+{%- if os() == "windows" -%}
+aqua exec -- blender
+{%- else -%}
+blender
+{%- endif -%}
+'''
 
-[tasks."blender:extensions:tasks"]
+[tasks.'blender:extensions:tasks']
 depends = [
-    "mise:tasks blender:extensions {{cwd}}"
+    'mise:tasks blender:extensions {{cwd}}'
 ]
 
-[tasks."blender:extensions:setup"]
+[tasks.'blender:extensions:setup']
 run = 'aqua i blender'
 
-[tasks."blender:extensions:run"]
+[tasks.'blender:extensions:run']
 run = '{{vars.blender_exec}} {{arg(var=true, default="")}}'
 
-[tasks."blender:extensions:clean"]
+[tasks.'blender:extensions:clean']
 run = [
     'rm -rf {{ vars.build_dir }}'
 ]
@@ -39,7 +46,7 @@ run_windows = [
     'rmdir /s /q {{ vars.build_dir | replace(from="/", to="\") }}'
 ]
 
-[tasks."blender:extensions:build:create"]
+[tasks.'blender:extensions:build:create']
 run = [
     'mkdir -p {{ vars.build_dir }} || exit 0'
 ]
@@ -49,63 +56,57 @@ run_windows = [
 hide = true
 quiet = true
 
-[tasks."blender:extensions:build"]
+[tasks.'blender:extensions:build']
 depends = [
     'blender:extensions:build:create'
 ]
 run = [
-    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/sandbox --output-dir {{vars.build_dir}}',
-    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/comfyui --output-dir {{vars.build_dir}}',
+    'uv sync',
+    'python {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/blender_manifest.toml',
+    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/sandbox --output-dir {{vars.build_dir}}',
+    'python {{cwd}}/utils/update_version.py {{cwd}}/modules/comfyui/blender_manifest.toml',
+    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/comfyui --output-dir {{vars.build_dir}}',
     '{{vars.blender_exec}} -c extension server-generate --repo-dir {{vars.build_dir}}',
 ]
 
-
-[tasks."blender:extensions:set-version"]
-#description = "Set a new version to Blender extension/s"
-dir = '{{cwd}}/../..'
-run = [
-    '',
-    'python ./.mise/scripts/set_extension_version.py {{arg(name="extension_name")}} {{arg(name="version")}}'
-]
-
-##[tasks."blender:extensions:publish"]
-##description = "Publish Blender Extesion on release branch with GitHub Actions"
+##[tasks.'blender:extensions:publish']
+##description = 'Publish Blender Extesion on release branch with GitHub Actions'
 ##run = [
-##    "gh workflow run jnt-blender-extensions.yml --ref develop"
+##    'gh workflow run jnt-blender-extensions.yml --ref develop'
 ##]
 ##
-##[tasks."blender:extensions:publish:status"]
-##description = ""
+##[tasks.'blender:extensions:publish:status']
+##description = ''
 ##run = [
-##    "gh run list --workflow=jnt-blender-extensions.yml"
+##    'gh run list --workflow=jnt-blender-extensions.yml'
 ##]
 ##
-##[tasks."blender:extensions:unpublish"]
-##description = "Drop Blender extensions on release/next"
+##[tasks.'blender:extensions:unpublish']
+##description = 'Drop Blender extensions on release/next'
 ##run = [
-##    "git push -d origin release/next"
+##    'git push -d origin release/next'
 ##]
 #
-#[tasks."blender:extensions:cli"]
-#description = "Access to Blender extensions CLI"
+#[tasks.'blender:extensions:cli']
+#description = 'Access to Blender extensions CLI'
 #run = [
-#    "blender -c extension"
+#    'blender -c extension'
 #]
 #
-#[tasks."blender:extensions:setup"]
-#description = "Setup extension on Blender"
+#[tasks.'blender:extensions:setup']
+#description = 'Setup extension on Blender'
 #run = [
-#    "blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json"
+#    'blender -c extension repo-add jnt --name JNT --url https://raw.githubusercontent.com/JervNorsk/jnt-blender/refs/heads/release/index.json'
 #]
 #
-#[tasks."blender:extensions:clean"]
-#description = "Clean up extension on Blender"
+#[tasks.'blender:extensions:clean']
+#description = 'Clean up extension on Blender'
 #run = [
-#    "blender -c extension repo-remove jnt"
+#    'blender -c extension repo-remove jnt'
 #]
 #
-#[tasks."blender:extensions:check"]
-#description = "Check up extension on Blender"
+#[tasks.'blender:extensions:check']
+#description = 'Check up extension on Blender'
 #run = [
-#    "blender -c extension sync"
+#    'blender -c extension sync'
 #]

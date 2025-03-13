@@ -1,0 +1,16 @@
+schema_version = "1.0.0"
+id = "jnt_comfyui"
+version = "0.1.0"
+type = "add-on"
+name = "JNT ComfyUI"
+tagline = "Blender extension for ComfyUI"
+description = "This extension want provide a custom node graph as interface between Blender and ComfyUI."
+maintainer = "Jerv Norsk <jerv.norsk@gmail.com>"
+website = "https://extensions.blender.org/add-ons/jnt_comfyui/"
+tags = [ "Node",]
+blender_version_min = "4.3.2"
+license = [ "SPDX:GPL-3.0-or-later",]
+copyright = [ "2025 JervNorsk",]
+
+[build]
+paths_exclude_pattern = [ "__pycache__/", "/.git/", "/build/",]

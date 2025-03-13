@@ -2,39 +2,35 @@ version = 1
 revision = 1
 requires-python = ">=3.11"
 
-[manifest]
-members = [
-    "jnt",
-    "jnt-comfyui",
-    "jnt-sandbox",
-]
-
 [[package]]
 name = "jnt"
-version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "jnt-comfyui" },
     { name = "jnt-sandbox" },
+]
+
+[package.dev-dependencies]
+dev = [
     { name = "toml" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "jnt-comfyui", virtual = "comfyui" },
-    { name = "jnt-sandbox", virtual = "sandbox" },
-    { name = "toml" },
+    { name = "jnt-comfyui", editable = "modules/comfyui" },
+    { name = "jnt-sandbox", editable = "modules/sandbox" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "toml" }]
 
 [[package]]
 name = "jnt-comfyui"
-version = "0.1.0"
-source = { virtual = "comfyui" }
+source = { editable = "modules/comfyui" }
 
 [[package]]
 name = "jnt-sandbox"
-version = "0.1.0"
-source = { virtual = "sandbox" }
+source = { editable = "modules/sandbox" }
 
 [[package]]
 name = "toml"

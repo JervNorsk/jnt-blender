@@ -4,7 +4,7 @@ registries:
 
 - name: local
   type: local
-  path: .mise/tools/blender/aqua/registry.yaml
+  path: ../../.mise/tools/blender/aqua/registry.yaml
 
 #- name: github
 #  type: github_content
@@ -14,6 +14,6 @@ registries:
 #  path: registry.yaml
 
 packages:
-  - name: blender/blender@4.3.2
+  - name: blender/blender@4.3.0
     registry: local
 #    registry: github

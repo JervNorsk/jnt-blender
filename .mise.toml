@@ -21,11 +21,11 @@ dir = "{{cwd}}/.mise/registry"
 run = "mise r mise:registry:{{arg(var=true, default='tasks')}}"
 
 [tasks."blender:core"]
-dir = "{{cwd}}/modules/core"
+dir = "{{cwd}}/services/core"
 run = "mise r blender:core:{{arg(var=true, default='tasks')}}"
 
 [tasks."blender:extensions"]
-dir = "{{cwd}}/modules/extensions"
+dir = "{{cwd}}/services/extensions"
 run = "mise r blender:extensions:{{arg(var=true, default='tasks')}}"
 
 #[tasks."github:actions:pull"]
