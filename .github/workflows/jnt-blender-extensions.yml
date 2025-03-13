@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - develop
       - main
       - release
 
@@ -30,8 +31,7 @@ jobs:
         with:
           cache: true
 
-      # TODO: install Blender via MISE
-
+      # TODO: Install Blender via MISE
       - name: Install Blender
         uses: JervNorsk/jnt-blender@actions/setup
         with:
@@ -41,7 +41,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y zip unzip
 
       - name: Run build
-#        working-directory: services/extensions
         run: |
           mise -v run blender:extensions build
 
