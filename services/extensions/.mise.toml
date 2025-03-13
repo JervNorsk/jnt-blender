@@ -62,16 +62,16 @@ depends = [
     'blender:extensions:build:create'
 ]
 run = [
-    'uv run {{cwd}}/utils/show_version.py'
+    'uv run {{cwd}}/utils/show_version.py',
 #    'echo {{cwd}}',
 #    'uv sync',
 #    'uv run {{cwd}}/utils/update_version.py {{cwd}}/pyproject.toml',
 #    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/pyproject.toml',
-#    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/blender_manifest.toml',
-#    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/sandbox --output-dir {{vars.build_dir}}',
-#    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/comfyui/blender_manifest.toml',
-#    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/comfyui --output-dir {{vars.build_dir}}',
-#    '{{vars.blender_exec}} -c extension server-generate --repo-dir {{vars.build_dir}}',
+    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/blender_manifest.toml',
+    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/sandbox --output-dir {{vars.build_dir}}',
+    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/comfyui/blender_manifest.toml',
+    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/comfyui --output-dir {{vars.build_dir}}',
+    '{{vars.blender_exec}} -c extension server-generate --repo-dir {{vars.build_dir}}',
 ]
 
 [tasks.'blender:extensions:workflow']
