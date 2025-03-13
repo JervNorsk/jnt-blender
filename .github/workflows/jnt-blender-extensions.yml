@@ -43,18 +43,20 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y zip unzip
 
       - name: Run build
-        run: mise run blender:extensions:build
+#        working-directory: services/extensions
+        run: |
+          mise -v run blender:extensions build
 
-      - if: github.ref == 'refs/heads/release'
-        name: Upload artifacts
+      - name: Upload artifacts
+        if: github.ref == 'refs/heads/release'
         uses: actions/upload-artifact@v4
         with:
           name: jnt-blender-extensions
-          path: ./build/extensions
+          path: ./services/extensions/build
 
   deploy:
-    if: github.ref == 'refs/heads/release'
     needs: build
+    if: github.ref == 'refs/heads/release'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

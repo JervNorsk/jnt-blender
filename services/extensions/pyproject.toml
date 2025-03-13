@@ -1,5 +1,6 @@
 [project]
 name = 'jnt'
+#version = '0.1.0'
 dynamic = ['version']
 requires-python = '>=3.11'
 dependencies = [
@@ -23,7 +24,8 @@ jnt-comfyui = { path = "modules/comfyui", editable = true }
 [tool.setuptools.packages.find]
 where = ["modules"]
 include = [
-    "sandbox"
+    "sandbox",
+    "comfyui"
 ]
 
 [tool.setuptools_scm]

@@ -15,6 +15,7 @@ UV_LINK_MODE='copy'
 AQUA_LOG_LEVEL='debug'
 AQUA_DISABLE_POLICY='true'
 _.python.venv = { path = '{{cwd}}/.venv' }
+SETUPTOOLS_SCM_DEBUG = 'true'
 
 [vars]
 #branch_name='{{ exec(command="git tag --sort=refname | head -n 1") }}'
@@ -61,20 +62,34 @@ depends = [
     'blender:extensions:build:create'
 ]
 run = [
-    'uv sync',
-    'python {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/blender_manifest.toml',
+#    'echo {{cwd}}',
+#    'uv sync',
+#    'uv run {{cwd}}/utils/update_version.py {{cwd}}/pyproject.toml',
+#    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/pyproject.toml',
+    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/blender_manifest.toml',
     '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/sandbox --output-dir {{vars.build_dir}}',
-    'python {{cwd}}/utils/update_version.py {{cwd}}/modules/comfyui/blender_manifest.toml',
+    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/comfyui/blender_manifest.toml',
     '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/comfyui --output-dir {{vars.build_dir}}',
     '{{vars.blender_exec}} -c extension server-generate --repo-dir {{vars.build_dir}}',
 ]
 
-##[tasks.'blender:extensions:publish']
-##description = 'Publish Blender Extesion on release branch with GitHub Actions'
-##run = [
-##    'gh workflow run jnt-blender-extensions.yml --ref develop'
-##]
-##
+[tasks.'blender:extensions:workflow']
+dir = "{{cwd}}/../.."
+run = [
+    'act -W .github/workflows/jnt-blender-extensions.yml {{arg(var=true, default="")}}'
+]
+
+[tasks.'blender:extensions:workflow:validate']
+depends = [
+    'blender:extensions:workflow --dryrun'
+]
+
+#[tasks.'blender:extensions:publish']
+#description = 'Publish Blender Extesion on release branch with GitHub Actions'
+#run = [
+#    'gh workflow run jnt-blender-extensions.yml --ref develop'
+#]
+
 ##[tasks.'blender:extensions:publish:status']
 ##description = ''
 ##run = [
