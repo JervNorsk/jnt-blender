@@ -39,6 +39,9 @@ run = 'aqua i blender'
 [tasks.'blender:extensions:run']
 run = '{{vars.blender_exec}} {{arg(var=true, default="")}}'
 
+[tasks.'blender:extensions:run:help']
+run = '{{vars.blender_exec}} --help'
+
 [tasks.'blender:extensions:clean']
 run = [
     'rm -rf {{ vars.build_dir }}'
@@ -47,7 +50,20 @@ run_windows = [
     'rmdir /s /q {{ vars.build_dir | replace(from="/", to="\") }}'
 ]
 
-[tasks.'blender:extensions:build:create']
+[tasks.'blender:extensions:build']
+depends = [
+    'blender:extensions:build:workspace',
+]
+run = [
+    'mise r blender:extensions:build:module {{cwd}} jnt',
+    'mise r blender:extensions:build:addon {{cwd}}/modules jnt_sandbox',
+    'mise r blender:extensions:build:addon {{cwd}}/modules jnt_comfyui',
+]
+depends_post = [
+#    "blender:extensions:build:index",
+]
+
+[tasks.'blender:extensions:build:workspace']
 run = [
     'mkdir -p {{ vars.build_dir }} || exit 0'
 ]
@@ -57,22 +73,24 @@ run_windows = [
 hide = true
 quiet = true
 
-[tasks.'blender:extensions:build']
-depends = [
-    'blender:extensions:build:create'
-]
+[tasks.'blender:extensions:build:module']
 run = [
-    'uv run {{cwd}}/utils/show_version.py',
-#    'echo {{cwd}}',
-#    'uv sync',
-#    'uv run {{cwd}}/utils/update_version.py {{cwd}}/pyproject.toml',
-#    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/pyproject.toml',
-    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/sandbox/blender_manifest.toml',
-    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/sandbox --output-dir {{vars.build_dir}}',
-    'uv run {{cwd}}/utils/update_version.py {{cwd}}/modules/comfyui/blender_manifest.toml',
-    '{{vars.blender_exec}} -c extension build --source-dir {{cwd}}/modules/comfyui --output-dir {{vars.build_dir}}',
+    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}} {{arg(name="name")}}',
+]
+hide = true
+
+[tasks.'blender:extensions:build:addon']
+run = [
+    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}}/{{arg(name="name")}} {{arg(name="name")}}',
+    '{{vars.blender_exec}} -c extension build --source-dir {{arg(name="path")}}/{{arg(name="name")}} --output-dir {{vars.build_dir}}',
+]
+hide = true
+
+[tasks.'blender:extensions:build:index']
+run = [
     '{{vars.blender_exec}} -c extension server-generate --repo-dir {{vars.build_dir}}',
 ]
+hide = true
 
 [tasks.'blender:extensions:workflow']
 dir = "{{cwd}}/../.."

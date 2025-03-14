@@ -1,32 +1,17 @@
 [project]
-name = 'jnt'
-#version = '0.1.0'
-dynamic = ['version']
-requires-python = '>=3.11'
-dependencies = [
-    'jnt-sandbox',
-    'jnt-comfyui',
-]
-
-[build-system]
-requires = ['setuptools', 'setuptools_scm']
-build-backend = 'setuptools.build_meta'
+name = "jnt"
+version = "2025.1"
+requires-python = ">=3.11"
+dependencies = [ "jnt_sandbox", "jnt_comfyui",]
 
 [tool.uv]
-dev-dependencies = [
-    'toml'
-]
+dev-dependencies = [ "toml",]
 
-[tool.uv.sources]
-jnt-sandbox = { path = "modules/sandbox", editable = true }
-jnt-comfyui = { path = "modules/comfyui", editable = true }
+[tool.uv.workspace]
+members = [ "modules/*",]
 
-[tool.setuptools.packages.find]
-where = ["modules"]
-include = [
-    "sandbox",
-    "comfyui"
-]
+[tool.uv.sources.jnt_sandbox]
+workspace = true
 
-[tool.setuptools_scm]
-root = '../..'
+[tool.uv.sources.jnt_comfyui]
+workspace = true
