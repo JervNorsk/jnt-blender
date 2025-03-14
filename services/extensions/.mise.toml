@@ -103,11 +103,17 @@ depends = [
     'blender:extensions:workflow --dryrun'
 ]
 
-#[tasks.'blender:extensions:publish']
+[tasks.'blender:extensions:publish']
 #description = 'Publish Blender Extesion on release branch with GitHub Actions'
-#run = [
+run = [
+    'git tag extensions/{{arg(name="module")}}/{{arg(name="version")}}'
 #    'gh workflow run jnt-blender-extensions.yml --ref develop'
-#]
+]
+
+[tasks.'blender:extensions:publish:list']
+run = [
+    'git tag --sort=-v:refname'
+]
 
 ##[tasks.'blender:extensions:publish:status']
 ##description = ''
