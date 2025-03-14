@@ -60,7 +60,7 @@ run = [
     'mise r blender:extensions:build:addon {{cwd}}/modules jnt_comfyui',
 ]
 depends_post = [
-#    "blender:extensions:build:index",
+    "blender:extensions:build:index",
 ]
 
 [tasks.'blender:extensions:build:workspace']
