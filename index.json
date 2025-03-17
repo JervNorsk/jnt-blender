@@ -1,0 +1,52 @@
+{
+  "version": "v1",
+  "blocklist": [],
+  "data": [
+    {
+      "schema_version": "1.0.0",
+      "id": "jnt_comfyui",
+      "name": "JNT ComfyUI",
+      "tagline": "Blender extension for ComfyUI",
+      "version": "0.1.0",
+      "type": "add-on",
+      "maintainer": "Jerv Norsk <jerv.norsk@gmail.com>",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.3.2",
+      "website": "https://extensions.blender.org/add-ons/jnt_comfyui/",
+      "copyright": [
+        "2025 JervNorsk"
+      ],
+      "tags": [
+        "Node"
+      ],
+      "archive_url": "./jnt_comfyui-0.1.0.zip",
+      "archive_size": 13774,
+      "archive_hash": "sha256:96fa4a8ed8349d9df09a45302bb3b3ab2cf2cd48517eb44ca8e8fc0631eb9cdd"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "jnt_sandbox",
+      "name": "JNT Sandbox",
+      "tagline": "A collection of experiments and custom nodes",
+      "version": "0.3.2",
+      "type": "add-on",
+      "maintainer": "Jerv Norsk <jerv.norsk@gmail.com>",
+      "license": [
+        "SPDX:GPL-3.0-or-later"
+      ],
+      "blender_version_min": "4.3.2",
+      "website": "https://extensions.blender.org/add-ons/jnt_sandbox/",
+      "copyright": [
+        "2025 JervNorsk"
+      ],
+      "tags": [
+        "Geometry Nodes"
+      ],
+      "archive_url": "./jnt_sandbox-0.3.2.zip",
+      "archive_size": 4392075,
+      "archive_hash": "sha256:d7ba1969d4acca74bf18342e82b53ffef031864b54db43afe25b4212f4320dfc"
+    }
+  ]
+}
