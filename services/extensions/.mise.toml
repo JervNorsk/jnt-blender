@@ -107,6 +107,7 @@ depends = [
 #description = 'Publish Blender Extesion on release branch with GitHub Actions'
 run = [
     'git tag extensions/{{arg(name="module")}}/{{arg(name="version")}}',
+    'git push',
     'git push --tags',
 ]
 
