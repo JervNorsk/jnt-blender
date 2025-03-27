@@ -6,6 +6,10 @@
 
 VERSION 1
 
+5cbdcba5-7848-4c09-8207-de09bf6dd6f0:Brushes:Brushes
+f6c68746-4f90-489e-87d1-8a29d238ca6d:Brushes/Mesh Texture Paint:Brushes-Mesh Texture Paint
+5e727876-75c9-4c63-a54c-7d5ccb5d5abb:Brushes/Mesh Texture Paint/Curve:Brushes-Mesh Texture Paint-Curve
+d90acb3f-9f52-4f39-8108-3303ac4953a2:Brushes/Mesh Texture Paint/Jitter:Brushes-Mesh Texture Paint-Jitter
 1f61d18e-1d21-4dcc-b1a7-8b17ab23c05f:Color:Color
 708eae9f-c90a-42ba-95f7-3c38faad10fd:Converter:Converter
 e9e7d2b4-3fd5-457b-bfeb-511928fbc441:Input:Input
