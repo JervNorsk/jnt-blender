@@ -7,7 +7,7 @@ tagline = "A collection of experiments and custom nodes"
 maintainer = "Jerv Norsk <jerv.norsk@gmail.com>"
 website = "https://extensions.blender.org/add-ons/jnt_sandbox/"
 tags = [ "Geometry Nodes",]
-blender_version_min = "4.3.2"
+blender_version_min = "4.2.4"
 license = [ "SPDX:GPL-3.0-or-later",]
 copyright = [ "2025 JervNorsk",]
 
