@@ -23,14 +23,14 @@
       ],
       "archive_url": "./jnt_comfyui-0.1.0.zip",
       "archive_size": 13774,
-      "archive_hash": "sha256:26253730c05692e64ecaaf0ed7e51e6eb21dab1f69b9fae043af89cce4dc7c53"
+      "archive_hash": "sha256:4d2a6ecbda60c635bfa90a048302e50a5f1a25ce58366980898e9cef63cbdc9f"
     },
     {
       "schema_version": "1.0.0",
       "id": "jnt_sandbox",
       "name": "JNT Sandbox",
       "tagline": "A collection of experiments and custom nodes",
-      "version": "0.5.1",
+      "version": "0.6.0",
       "type": "add-on",
       "maintainer": "Jerv Norsk <jerv.norsk@gmail.com>",
       "license": [
@@ -44,9 +44,9 @@
       "tags": [
         "Geometry Nodes"
       ],
-      "archive_url": "./jnt_sandbox-0.5.1.zip",
-      "archive_size": 5113513,
-      "archive_hash": "sha256:5cf6b8ff7b3b597a6726d6c7f6374ee40bf850f6301c2afaedc3a99a4b38184b"
+      "archive_url": "./jnt_sandbox-0.6.0.zip",
+      "archive_size": 5113512,
+      "archive_hash": "sha256:f5a51a130d64b858e8285bb606e1a7f76cadb0d6a22c1e68f07958e54211c615"
     }
   ]
 }
