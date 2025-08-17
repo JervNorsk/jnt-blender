@@ -2,9 +2,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/aqua-yaml.json
 registries:
 
-- name: local
+- name: blender.org
   type: local
-  path: ../../.mise/tools/blender/aqua/registry.yaml
+  path: .mise/tools/blender/aqua/registry.yaml
 
 #- name: github
 #  type: github_content
@@ -14,7 +14,11 @@ registries:
 #  path: registry.yaml
 
 packages:
-  - registry: local
-#    registry: github
+  - registry: blender.org
+    # ------------------------
+    # https://developer.blender.org/docs/release_notes
+    # ------------------------
+#    name: blender/blender@4.2.4
 #    name: blender/blender@4.3.2
-    name: blender/blender@4.4.0
+#    name: blender/blender@4.4.3
+    name: blender/blender@4.5.1
