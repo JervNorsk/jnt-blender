@@ -1,6 +1,6 @@
 [project]
 name = "jnt"
-version = "2025.2.0"
+version = "2025.2.1"
 requires-python = ">=3.11"
 dependencies = [ "jnt_sandbox",]
 

@@ -119,6 +119,13 @@ run = [
     'git tag extensions/{{arg(name="module")}}/{{arg(name="version")}}',
 ]
 
+[tasks.'blender:extensions:version:rm']
+description = 'Remove Blender extension version'
+run = [
+    'git tag -d extensions/{{arg(name="module")}}/{{arg(name="version")}}',
+]
+hide = true
+
 [tasks.'blender:extensions:publish']
 description = 'Publish Blender extesion on release branch with GitHub Actions'
 run = [

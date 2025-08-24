@@ -19,7 +19,7 @@ wheels = [
 
 [[package]]
 name = "jnt"
-version = "2025.2.0"
+version = "2025.2.1"
 source = { virtual = "." }
 dependencies = [
     { name = "jnt-sandbox" },
