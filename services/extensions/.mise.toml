@@ -57,6 +57,11 @@ run_windows = [
 [tasks.'blender:extensions:project']
 run = "uv tree"
 
+[tasks.'blender:extensions:project:update']
+run = [
+    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}} {{arg(name="name")}}',
+]
+
 [tasks.'blender:extensions:install']
 run = "uv sync"
 
@@ -66,8 +71,7 @@ depends = [
 ]
 run = [
 #    "uv build",
-    'mise r blender:extensions:build:project {{cwd}} jnt',
-    'mise r blender:extensions:build:addon {{cwd}}/packages/sandbox jnt_sandbox',
+    'mise r blender:extensions:build:addon {{cwd}}/packages/sandbox',
 ]
 depends_post = [
     "blender:extensions:build:index",
@@ -83,15 +87,8 @@ run_windows = [
 hide = true
 quiet = true
 
-[tasks.'blender:extensions:build:project']
-run = [
-    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}} {{arg(name="name")}}',
-]
-hide = true
-
 [tasks.'blender:extensions:build:addon']
 run = [
-    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}} {{arg(name="name")}}',
     '{{vars.blender_exec}} -c extension build --source-dir {{arg(name="path")}} --output-dir {{vars.build_dir}}',
 ]
 hide = true
@@ -117,25 +114,29 @@ depends = [
 description = 'Update Blender extension version'
 run = [
     'git tag extensions/{{arg(name="module")}}/{{arg(name="version")}}',
+    'mise r blender:extensions:project:update {{cwd}}/packages jnt',
+    'mise r blender:extensions:project:update {{cwd}}/packages/sandbox jnt_sandbox',
 ]
 
 [tasks.'blender:extensions:version:rm']
 description = 'Remove Blender extension version'
 run = [
     'git tag -d extensions/{{arg(name="module")}}/{{arg(name="version")}}',
+    'mise r blender:extensions:project:update {{cwd}}/packages jnt',
+    'mise r blender:extensions:project:update {{cwd}}/packages/sandbox jnt_sandbox',
 ]
 hide = true
+
+[tasks.'blender:extensions:version:list']
+run = [
+    'git tag --sort=-v:refname'
+]
 
 [tasks.'blender:extensions:publish']
 description = 'Publish Blender extesion on release branch with GitHub Actions'
 run = [
     'git push',
     'git push --tags',
-]
-
-[tasks.'blender:extensions:publish:list']
-run = [
-    'git tag --sort=-v:refname'
 ]
 
 ##[tasks.'blender:extensions:publish:status']
