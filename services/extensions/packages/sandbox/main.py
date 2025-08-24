@@ -1,4 +1,5 @@
 import importlib
+# import ..jnt_commons
 
 # -----------------------------------------------------------------------------
 from . import (
@@ -10,10 +11,10 @@ from . import (
 from .utils import extension
 
 modules = (
-    operations,
-    nodes,
-    ui,
     assets,
+    # nodes,
+    # operations,
+    ui,
 )
 
 def register():

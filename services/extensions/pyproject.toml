@@ -1,17 +1,14 @@
 [project]
 name = "jnt"
-version = "2025.1"
+version = "2025.1.7"
 requires-python = ">=3.11"
-dependencies = [ "jnt_sandbox", "jnt_comfyui",]
+dependencies = [ "jnt_sandbox",]
 
 [tool.uv]
 dev-dependencies = [ "toml",]
 
 [tool.uv.workspace]
-members = [ "modules/*",]
+members = [ "libs/*", "packages/*",]
 
 [tool.uv.sources.jnt_sandbox]
-workspace = true
-
-[tool.uv.sources.jnt_comfyui]
 workspace = true

@@ -5,16 +5,23 @@ requires-python = ">=3.11"
 [manifest]
 members = [
     "jnt",
-    "jnt-comfyui",
     "jnt-sandbox",
 ]
 
 [[package]]
+name = "fake-bpy-module"
+version = "20250630"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f0/5e/b956ac429e06a98f11f6316cdb7c94b86afd866b43923d0ca846964d34b0/fake_bpy_module-20250630.tar.gz", hash = "sha256:5d0e9cd6686aee1842fc63249f108dbd42374a5080ed513078900381658d7c00", size = 954936 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b4/1a/dcdc4882c6f590b4f16fc118ef29115b718d786cd252d298e8faaf136ca7/fake_bpy_module-20250630-py3-none-any.whl", hash = "sha256:2f701fa3858c452b1bf44d19feb47a5b1d2c0cc02a17b61616009f2b9535aedc", size = 1081797 },
+]
+
+[[package]]
 name = "jnt"
-version = "2025.1"
+version = "2025.1.7"
 source = { virtual = "." }
 dependencies = [
-    { name = "jnt-comfyui" },
     { name = "jnt-sandbox" },
 ]
 
@@ -24,23 +31,21 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "jnt-comfyui", virtual = "modules/jnt_comfyui" },
-    { name = "jnt-sandbox", virtual = "modules/jnt_sandbox" },
-]
+requires-dist = [{ name = "jnt-sandbox", virtual = "packages/jnt_sandbox" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "toml" }]
 
 [[package]]
-name = "jnt-comfyui"
-version = "0.1.0"
-source = { virtual = "modules/jnt_comfyui" }
-
-[[package]]
 name = "jnt-sandbox"
-version = "0.2.0"
-source = { virtual = "modules/jnt_sandbox" }
+version = "0.6.1"
+source = { virtual = "packages/jnt_sandbox" }
+dependencies = [
+    { name = "fake-bpy-module" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "fake-bpy-module" }]
 
 [[package]]
 name = "toml"

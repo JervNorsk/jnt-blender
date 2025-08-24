@@ -1,3 +1,6 @@
+from ..libs.jnt import (
+    JntBlenderFeature
+)
 import sys
 import os
 import importlib
@@ -21,7 +24,7 @@ def get_extension_path():
         return None
 
 def validate_extension_asset_library_is_present():
-    asset_library = find_extension_asset_library();
+    asset_library = find_extension_asset_library()
     # if asset_library is None:
     #     print("# Extension AssetLibrary not present!")
     # else:
@@ -38,29 +41,6 @@ def find_extension_asset_library():
 bpy_asset_libraries = bpy.context.preferences.filepaths.asset_libraries
 jnt_extension_id = get_extension_id()
 jnt_extension_path = get_extension_path()
-
-def register():
-    validate_extension_asset_library_is_present()
-
-    jnt_extension_asset_library = find_extension_asset_library()
-    if jnt_extension_asset_library is None:
-        jnt_extension_asset_library = bpy_asset_libraries.new(name="JNT Sandbox")
-        jnt_extension_asset_library.path = jnt_extension_path
-        jnt_extension_asset_library.import_method = 'LINK'
-        # bpy_asset_libraries.add(jnt_asset_library)
-
-    validate_extension_asset_library_is_present()
-    # checkout()
-
-def unregister():
-    validate_extension_asset_library_is_present()
-
-    jnt_asset_library = find_extension_asset_library()
-    if jnt_asset_library is not None:
-        bpy_asset_libraries.remove(jnt_asset_library)
-        # bpy.ops.wm.save_userpref()
-
-    validate_extension_asset_library_is_present()
 
 # def checkout():
 #     name = jnt_extension_id.rsplit('.', 1)[-1]
@@ -85,3 +65,34 @@ def unregister():
 #                 print(f"Nome dell'addon estratto dal manifest: {addon_name}")
 #             else:
 #                 print(f"Il file '{manifest_path}' non esiste.")
+
+# -----------------------------------------------------------------------------
+class JNT_CL_asset_library(JntBlenderFeature):
+    """
+        JNT feature that manage a set of Blender class
+    """
+
+    def register(self):
+        validate_extension_asset_library_is_present()
+
+        jnt_extension_asset_library = find_extension_asset_library()
+        if jnt_extension_asset_library is None:
+            jnt_extension_asset_library = bpy_asset_libraries.new(name="JNT Sandbox")
+            jnt_extension_asset_library.path = jnt_extension_path
+            jnt_extension_asset_library.import_method = 'LINK'
+            # bpy_asset_libraries.add(jnt_asset_library)
+
+        validate_extension_asset_library_is_present()
+        # checkout()
+
+    def unregister(self):
+        validate_extension_asset_library_is_present()
+
+        jnt_asset_library = find_extension_asset_library()
+        if jnt_asset_library is not None:
+            bpy_asset_libraries.remove(jnt_asset_library)
+            # bpy.ops.wm.save_userpref()
+
+        validate_extension_asset_library_is_present()
+
+

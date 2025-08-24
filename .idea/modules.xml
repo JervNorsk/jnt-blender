@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/blender.iml" filepath="$PROJECT_DIR$/.idea/blender.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/extensions/jnt.iml" filepath="$PROJECT_DIR$/services/extensions/jnt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/extensions/packages/sandbox/jnt_sandbox.iml" filepath="$PROJECT_DIR$/services/extensions/packages/sandbox/jnt_sandbox.iml" />
     </modules>
   </component>
 </project>

@@ -11,11 +11,12 @@ aqua = 'latest'
 #blender = 'latest'
 
 [env]
-UV_LINK_MODE='copy'
-AQUA_LOG_LEVEL='debug'
+AQUA_LOG_LEVEL='info'
 AQUA_DISABLE_POLICY='true'
+
 _.python.venv = { path = '{{cwd}}/.venv' }
 SETUPTOOLS_SCM_DEBUG = 'true'
+UV_LINK_MODE='copy'
 
 [vars]
 #branch_name='{{ exec(command="git tag --sort=refname | head -n 1") }}'
@@ -33,14 +34,17 @@ depends = [
     'mise:tasks blender:extensions {{cwd}}'
 ]
 
-[tasks.'blender:extensions:setup']
-run = 'aqua i blender'
+#[tasks.'blender:extensions:setup']
+#run = 'aqua i blender'
 
 [tasks.'blender:extensions:run']
 run = '{{vars.blender_exec}} {{arg(var=true, default="")}}'
 
 [tasks.'blender:extensions:run:help']
 run = '{{vars.blender_exec}} --help'
+
+[tasks.'blender:extensions:check']
+run = "{{vars.blender_exec}} -b"
 
 [tasks.'blender:extensions:clean']
 run = [
@@ -50,14 +54,20 @@ run_windows = [
     'rmdir /s /q {{ vars.build_dir | replace(from="/", to="\") }}'
 ]
 
+[tasks.'blender:extensions:project']
+run = "uv tree"
+
+[tasks.'blender:extensions:install']
+run = "uv sync"
+
 [tasks.'blender:extensions:build']
 depends = [
     'blender:extensions:build:workspace',
 ]
 run = [
-    'mise r blender:extensions:build:module {{cwd}} jnt',
-    'mise r blender:extensions:build:addon {{cwd}}/modules jnt_sandbox',
-    'mise r blender:extensions:build:addon {{cwd}}/modules jnt_comfyui',
+#    "uv build",
+    'mise r blender:extensions:build:project {{cwd}} jnt',
+    'mise r blender:extensions:build:addon {{cwd}}/packages jnt_sandbox',
 ]
 depends_post = [
     "blender:extensions:build:index",
@@ -73,7 +83,7 @@ run_windows = [
 hide = true
 quiet = true
 
-[tasks.'blender:extensions:build:module']
+[tasks.'blender:extensions:build:project']
 run = [
     'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}} {{arg(name="name")}}',
 ]

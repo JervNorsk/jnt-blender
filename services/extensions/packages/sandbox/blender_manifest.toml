@@ -1,15 +1,15 @@
 schema_version = "1.0.0"
 id = "jnt_sandbox"
-version = "0.2.0"
+version = "0.6.1"
 type = "add-on"
+blender_version_min = "4.2.4"
 name = "JNT Sandbox"
 tagline = "A collection of experiments and custom nodes"
-maintainer = "Jerv Norsk <jerv.norsk@gmail.com>"
-website = "https://extensions.blender.org/add-ons/jnt_sandbox/"
 tags = [ "Geometry Nodes",]
-blender_version_min = "4.2.4"
-license = [ "SPDX:GPL-3.0-or-later",]
+website = "https://extensions.blender.org/add-ons/jnt_sandbox/"
+maintainer = "Jerv Norsk <jerv.norsk@gmail.com>"
 copyright = [ "2025 JervNorsk",]
+license = [ "SPDX:GPL-3.0-or-later",]
 
 [build]
 paths_exclude_pattern = [ "__pycache__/", "/.git/", "/build/",]
