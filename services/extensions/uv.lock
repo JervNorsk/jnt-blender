@@ -19,7 +19,7 @@ wheels = [
 
 [[package]]
 name = "jnt"
-version = "2025.1.7"
+version = "2025.2.0"
 source = { virtual = "." }
 dependencies = [
     { name = "jnt-sandbox" },
@@ -31,15 +31,15 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "jnt-sandbox", virtual = "packages/jnt_sandbox" }]
+requires-dist = [{ name = "jnt-sandbox", virtual = "packages/sandbox" }]
 
 [package.metadata.requires-dev]
 dev = [{ name = "toml" }]
 
 [[package]]
 name = "jnt-sandbox"
-version = "0.6.1"
-source = { virtual = "packages/jnt_sandbox" }
+version = "0.7.0"
+source = { virtual = "packages/sandbox" }
 dependencies = [
     { name = "fake-bpy-module" },
 ]

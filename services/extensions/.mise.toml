@@ -67,7 +67,7 @@ depends = [
 run = [
 #    "uv build",
     'mise r blender:extensions:build:project {{cwd}} jnt',
-    'mise r blender:extensions:build:addon {{cwd}}/packages jnt_sandbox',
+    'mise r blender:extensions:build:addon {{cwd}}/packages/sandbox jnt_sandbox',
 ]
 depends_post = [
     "blender:extensions:build:index",
@@ -91,8 +91,8 @@ hide = true
 
 [tasks.'blender:extensions:build:addon']
 run = [
-    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}}/{{arg(name="name")}} {{arg(name="name")}}',
-    '{{vars.blender_exec}} -c extension build --source-dir {{arg(name="path")}}/{{arg(name="name")}} --output-dir {{vars.build_dir}}',
+    'uv run {{cwd}}/utils/update_version.py {{arg(name="path")}} {{arg(name="name")}}',
+    '{{vars.blender_exec}} -c extension build --source-dir {{arg(name="path")}} --output-dir {{vars.build_dir}}',
 ]
 hide = true
 
@@ -113,10 +113,15 @@ depends = [
     'blender:extensions:workflow --dryrun'
 ]
 
-[tasks.'blender:extensions:publish']
-#description = 'Publish Blender Extesion on release branch with GitHub Actions'
+[tasks.'blender:extensions:version']
+description = 'Update Blender extension version'
 run = [
     'git tag extensions/{{arg(name="module")}}/{{arg(name="version")}}',
+]
+
+[tasks.'blender:extensions:publish']
+description = 'Publish Blender extesion on release branch with GitHub Actions'
+run = [
     'git push',
     'git push --tags',
 ]
